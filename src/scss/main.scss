@@ -1,6 +1,6 @@
 @import "override-variables";
 
-@import "bootstrap-custom"; //@import "bootstrap";
+@import "bootstrap";//@import "bootstrap-custom";
 //@import "bootstrap/theme";
 
 body {
@@ -29,4 +29,5 @@ label {
 input[type="text"], input[type="password"] {
   -webkit-appearance:none;  /* Remove default shadow */
 }
+
 
