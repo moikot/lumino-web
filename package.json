@@ -17,5 +17,9 @@
     "gulp-sass": "^2.2.0",
     "gulp-concat": "^2.6.0",
     "gulp-livereload": "^3.8.1"
+  },
+  "dependencies": {
+    "vue": "^1.0.20",
+    "vue-resource": "^0.7.0"
   }
 }

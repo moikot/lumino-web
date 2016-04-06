@@ -10,18 +10,18 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="container" id="settings">
     <form class="form form-connect" role="form">
       <h1 class="form-connect-heading">Please connect me to your WiFi</h1>
       <br />
       <div class="form-group">
         <label for="name">My name is</label>
-        <input id="name" type="text" class="form-control" />
+        <input id="name" type="text" class="form-control" v-model="settings.name"/>
       </div>
       <div class="form-group">
         <label for="network">WiFi network</label>
         <div class="input-group">
-          <input id="network" type="text" class="form-control" />
+          <input id="network" type="text" class="form-control" v-model="settings.wifi_network"/>
           <div class="input-group-btn">
  	    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
               <span class="caret"></span>
@@ -37,11 +37,11 @@
       </div>
       <div class="form-group">
         <label for="password">WiFi password</label>
-        <input id="password" type="password" class="form-control" />
+        <input id="password" type="password" class="form-control" v-model="settings.wifi_password"/>
       </div>
       <br />
       <div class="form-group">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Connect</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" v-on:click="connect()">Connect</button>
       </div>
     </form>
   </div>

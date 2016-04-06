@@ -1,5 +1,5 @@
 /* gulpfile.js */
-var 
+var
     gulp = require('gulp'),
     sass = require('gulp-sass'),
     concat = require('gulp-concat'),
@@ -19,6 +19,12 @@ var bootstrapSass = {
 var bootstrapNative = {
         in: './node_modules/bootstrap.native/'
     };
+
+// Bootstrap native source
+var vue = {
+        in: './node_modules/vue/'
+    };
+
 
 // fonts
 //var fonts = {
@@ -50,6 +56,13 @@ var html = {
    out: dest,
    watch: source + '*.html' 
 };
+
+var js = {
+   in: source + 'js/*.js',
+   out: dest + 'js/',
+   watch: source + 'js/*.js', 
+};
+
   
 //gulp.task('fonts', function () {
 //    return gulp
@@ -79,6 +92,13 @@ gulp.task('bootstrapJs', function () {
 	  .pipe(gulp.dest(bootstrapJs.out));
 });
 
+gulp.task('appJs', function () {
+    return gulp
+	  .src(js.in)
+	  .pipe(gulp.dest(js.out))
+	  .pipe(liveReload());
+});
+
 gulp.task('html', function () {
     return gulp
 	  .src(html.in)
@@ -95,8 +115,9 @@ gulp.task('sass', /*['fonts'],*/ function () {
 });
 
 // default task
-gulp.task('default', ['sass', 'html', 'bootstrapJs'], function () {
+gulp.task('default', ['sass', 'html', 'bootstrapJs', 'appJs'], function () {
      liveReload.listen();
      gulp.watch(css.watch, ['sass']);
      gulp.watch(html.watch, ['html']);
+     gulp.watch(js.watch, ['appJs']);
 });
