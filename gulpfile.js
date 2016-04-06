@@ -57,10 +57,10 @@ var html = {
    watch: source + '*.html' 
 };
 
-var js = {
-   in: source + 'js/*.js',
-   out: dest + 'js/',
-   watch: source + 'js/*.js', 
+var tags = {
+   in: source + 'tags/*.tag',
+   out: dest + 'tags/',
+   watch: source + 'tags/*.js', 
 };
 
   
@@ -92,10 +92,10 @@ gulp.task('bootstrapJs', function () {
 	  .pipe(gulp.dest(bootstrapJs.out));
 });
 
-gulp.task('appJs', function () {
+gulp.task('appTags', function () {
     return gulp
-	  .src(js.in)
-	  .pipe(gulp.dest(js.out))
+	  .src(tags.in)
+	  .pipe(gulp.dest(tags.out))
 	  .pipe(liveReload());
 });
 
@@ -115,9 +115,9 @@ gulp.task('sass', /*['fonts'],*/ function () {
 });
 
 // default task
-gulp.task('default', ['sass', 'html', 'bootstrapJs', 'appJs'], function () {
+gulp.task('default', ['sass', 'html', 'bootstrapJs', 'appTags'], function () {
      liveReload.listen();
      gulp.watch(css.watch, ['sass']);
      gulp.watch(html.watch, ['html']);
-     gulp.watch(js.watch, ['appJs']);
+     gulp.watch(tags.watch, ['appTags']);
 });
