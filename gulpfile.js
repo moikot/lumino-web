@@ -1,7 +1,9 @@
 /* gulpfile.js */
 var 
     gulp = require('gulp'),
-    sass = require('gulp-sass');
+    sass = require('gulp-sass'),
+    concat = require('gulp-concat'),
+    liveReload = require('gulp-livereload');
 
 // source and distribution folder
 var
@@ -39,6 +41,7 @@ var css = {
 
 var bootstrapJs = {
    in: bootstrapNative.in + 'dist/bootstrap-native.js',
+   distName: 'bootstrap-native',
    out: dest + 'js/'
 };
 
@@ -55,26 +58,45 @@ var html = {
 //});
 
 gulp.task('bootstrapJs', function () {
+    var srcDir = bootstrapNative.in + 'lib/';
+    // array of source files to build
+    var sources = [
+//      srcDir + 'affix-native.js',
+//      srcDir + 'alert-native.js',
+//      srcDir + 'button-native.js',
+//      srcDir + 'carousel-native.js',
+//      srcDir + 'collapse-native.js',
+      srcDir + 'dropdown-native.js'//,
+//      srcDir + 'modal-native.js',
+//      srcDir + 'popover-native.js',
+//      srcDir + 'scrollspy-native.js',
+//      srcDir + 'tab-native.js',
+//      srcDir + 'tooltip-native.js'
+    ];
     return gulp
-	  .src(bootstrapJs.in)
+	  .src(sources)
+          .pipe(concat(bootstrapJs.distName + ".js"))
 	  .pipe(gulp.dest(bootstrapJs.out));
 });
 
 gulp.task('html', function () {
     return gulp
 	  .src(html.in)
-	  .pipe(gulp.dest(html.out));
+	  .pipe(gulp.dest(html.out))
+	  .pipe(liveReload());
 });
 
 // compile scss
 gulp.task('sass', /*['fonts'],*/ function () {
     return gulp.src(css.in)
-        .pipe(sass(css.sassOpts))
-        .pipe(gulp.dest(css.out));
+     .pipe(sass(css.sassOpts))
+     .pipe(gulp.dest(css.out))
+     .pipe(liveReload());
 });
 
 // default task
-gulp.task('default', ['sass', 'bootstrapJs', 'html'], function () {
+gulp.task('default', ['sass', 'html', 'bootstrapJs'], function () {
+     liveReload.listen();
      gulp.watch(css.watch, ['sass']);
      gulp.watch(html.watch, ['html']);
 });
