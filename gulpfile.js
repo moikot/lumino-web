@@ -19,10 +19,10 @@ var bootstrapNative = {
     };
 
 // fonts
-var fonts = {
-        in: [source + 'fonts/*.*', bootstrapSass.in + 'assets/fonts/**/*'],
-        out: dest + 'fonts/'
-    };
+//var fonts = {
+//        in: [source + 'fonts/*.*', bootstrapSass.in + 'assets/fonts/**/*'],
+//        out: dest + 'fonts/'
+//    };
 
 // css source file: .scss files
 var css = {
@@ -41,6 +41,12 @@ var bootstrapJs = {
    in: bootstrapNative.in + 'dist/bootstrap-native.js',
    out: dest + 'js/'
 };
+
+var html = {
+   in: source + '*.html',
+   out: dest,
+   watch: source + '*.html' 
+};
   
 //gulp.task('fonts', function () {
 //    return gulp
@@ -54,6 +60,12 @@ gulp.task('bootstrapJs', function () {
 	  .pipe(gulp.dest(bootstrapJs.out));
 });
 
+gulp.task('html', function () {
+    return gulp
+	  .src(html.in)
+	  .pipe(gulp.dest(html.out));
+});
+
 // compile scss
 gulp.task('sass', /*['fonts'],*/ function () {
     return gulp.src(css.in)
@@ -62,6 +74,7 @@ gulp.task('sass', /*['fonts'],*/ function () {
 });
 
 // default task
-gulp.task('default', ['sass'], function () {
+gulp.task('default', ['sass', 'bootstrapJs', 'html'], function () {
      gulp.watch(css.watch, ['sass']);
+     gulp.watch(html.watch, ['html']);
 });
