@@ -26,6 +26,10 @@ label {
   color: inherit;
 }
 
+.dropdown-menu > li > a {
+  padding: 8px 20px;
+}
+
 input[type="text"], input[type="password"] {
   -webkit-appearance:none;  /* Remove default shadow */
 }
