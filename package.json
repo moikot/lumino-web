@@ -11,14 +11,11 @@
   "devDependencies": {
     "body-parser": "^1.15.0",
     "bootstrap-sass": "^3.3.6",
+    "bootstrap.native": "^1.0.2",
     "express": "^4.13.4",
     "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-livereload": "^3.8.1",
     "gulp-sass": "^2.2.0",
-    "mongoose": "^4.4.11"
-  },
-  "dependencies": {
-    "bootstrap.native": "^1.0.2"
+    "gulp-concat": "^2.6.0",
+    "gulp-livereload": "^3.8.1"
   }
 }

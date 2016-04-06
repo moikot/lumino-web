@@ -1,66 +1,27 @@
-var Connection = require('../models/connection');
 var express = require('express');
 var router = express.Router();
 
-router.route('/connections')
-  .get(function(req, res) {
-    Connection.find(function(err, connections) {
-      if (err) {
-        return res.send(err);
-      }
-      res.json(connections);
-    });
-  })
-  .post(function(req, res) {
-    var connection = new Connection(req.body);
+var settings = { name: 'Moikot 007', wifi_network: "AwesomeWiFi", wifi_password: "********" };
+var connection = { connected: false };
 
-    connection.save(function(err) {
-      if (err) {
-        return res.send(err);
-      }
-      res.send({ message: 'Connection Added' });
+router.route('/settings')
+  .get(function(req, res) {
+    res.json(settings);   
+  })
+  .put(function(req, res) {
+    settings = req.body;
+    res.json({ message: 'Settings updated' });	
   });
-});
 
-router.route('/connections/:id')
-  .put(function(req,res){
-    Connection.findOne({ _id: req.params.id }, function(err, connection) {
-      if (err) {
-        return res.send(err);
-      }
 
-      for (var prop in req.body) {
-        connection[prop] = req.body[prop];
-      }
-
-      // save the connection
-      connection.save(function(err) {
-        if (err) {
-          return res.send(err);
-        }
-
-        res.json({ message: 'Connection updated!' });
-      });
-    });
-  })
+router.route('/connection')
   .get(function(req, res) {
-    Connection.findOne({ _id: req.params.id}, function(err, connection) {
-      if (err) {
-        return res.send(err);
-      }
-
-      res.json(connection);
-    });
+    res.json(connection);   
   })
-  .delete(function(req, res) {
-    Connection.remove({
-      _id: req.params.id
-    }, function(err, connection) {
-      if (err) {
-        return res.send(err);
-      }
-      res.json({ message: 'Connection successfully deleted' });
-    });
-});
+  .put(function(req, res) {
+    connection = req.body;
+    res.json({ message: 'Connection updated' });	
+  });
+
 
 module.exports = router;
