@@ -34,4 +34,10 @@
       </div>
     </form>
   </div>
+ <script>
+   this.on('mount', function() {
+     var dropdown = this.root.querySelector('[data-toggle=dropdown]');
+     new Dropdown(dropdown);
+   })
+ </script>
 </connect>

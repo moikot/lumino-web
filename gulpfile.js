@@ -20,9 +20,9 @@ var bootstrapNative = {
         in: './node_modules/bootstrap.native/'
     };
 
-// Bootstrap native source
-var vue = {
-        in: './node_modules/vue/'
+// Fecth REST polyfill
+var fetch = {
+        in: './node_modules/whatwg-fetch/'
     };
 
 
@@ -51,6 +51,11 @@ var bootstrapJs = {
    out: dest + 'js/'
 };
 
+var fetchJs = {
+  in: fetch.in + 'fetch.js',
+  out: dest + 'js/'
+};
+
 var html = {
    in: source + '*.html',
    out: dest,
@@ -60,10 +65,9 @@ var html = {
 var tags = {
    in: source + 'tags/*.tag',
    out: dest + 'tags/',
-   watch: source + 'tags/*.js', 
+   watch: source + 'tags/*.tag', 
 };
 
-  
 //gulp.task('fonts', function () {
 //    return gulp
 //        .src(fonts.in)
@@ -106,6 +110,12 @@ gulp.task('html', function () {
 	  .pipe(liveReload());
 });
 
+gulp.task('fetch', function () {
+    return gulp
+	  .src(fetchJs.in)
+	  .pipe(gulp.dest(fetchJs.out))
+});
+
 // compile scss
 gulp.task('sass', /*['fonts'],*/ function () {
     return gulp.src(css.in)
@@ -115,7 +125,7 @@ gulp.task('sass', /*['fonts'],*/ function () {
 });
 
 // default task
-gulp.task('default', ['sass', 'html', 'bootstrapJs', 'appTags'], function () {
+gulp.task('default', ['sass', 'html', 'bootstrapJs', 'appTags', 'fetch'], function () {
      liveReload.listen();
      gulp.watch(css.watch, ['sass']);
      gulp.watch(html.watch, ['html']);

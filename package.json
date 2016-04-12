@@ -19,7 +19,6 @@
     "gulp-livereload": "^3.8.1"
   },
   "dependencies": {
-    "vue": "^1.0.20",
-    "vue-resource": "^0.7.0"
+    "whatwg-fetch": "^0.11.0"
   }
 }
