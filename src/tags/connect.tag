@@ -5,7 +5,7 @@
       <br />
       <div class="form-group">
         <label for="name">My name is</label>
-        <input id="name" type="text" class="form-control"/>
+        <input name="name" type="text" class="form-control"/>
       </div>
       <div class="form-group">
         <label for="network">WiFi network</label>
@@ -38,16 +38,17 @@
    this.on('mount', function() {
      var dropdown = this.root.querySelector('[data-toggle=dropdown]');
      new Dropdown(dropdown);
-     
-     fetch('/api/settings')
+   })
+   var that = this;
+      fetch('/api/settings')
        .then(function(response) {
-        return response.json()
+          return response.json()
         })
        .then(function(json) {
-        console.log('parsed json', json)
-        }).catch(function(ex) {
-        console.log('parsing failed', ex)
+          that.name.value = json.name;
+        })
+        .catch(function(ex) {
+          console.log('parsing failed', ex)
       })
-   })
  </script>
 </connect>
