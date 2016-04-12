@@ -38,6 +38,16 @@
    this.on('mount', function() {
      var dropdown = this.root.querySelector('[data-toggle=dropdown]');
      new Dropdown(dropdown);
+     
+     fetch('/api/settings')
+       .then(function(response) {
+        return response.json()
+        })
+       .then(function(json) {
+        console.log('parsed json', json)
+        }).catch(function(ex) {
+        console.log('parsing failed', ex)
+      })
    })
  </script>
 </connect>

@@ -4,6 +4,8 @@ var connections = require('./routes');
 
 var app = express();
 
+app.use(express.static('../dist'));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use('/api', connections);
