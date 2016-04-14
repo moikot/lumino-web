@@ -10,16 +10,13 @@
       <div class="form-group">
         <label for="network">WiFi network</label>
         <div class="input-group">
-          <input id="network" type="text" class="form-control"/>
+          <input name="wifi_network" type="text" class="form-control"/>
           <div class="input-group-btn">
- 	    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+ 	        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu dropdown-menu-right">
-              <li><a href="#">BTWifi-with-FON</a></li>
-              <li><a href="#">BTWifi-X</a></li>
-              <li><a href="#">Virginmedia9996303</a></li>
-              <li><a href="#">ESP12801281</a></li>
+              <li each={ wifi_networks }><a href="#">{ name }</a></li>
             </ul>
           </div>
         </div>
@@ -39,16 +36,28 @@
      var dropdown = this.root.querySelector('[data-toggle=dropdown]');
      new Dropdown(dropdown);
    })
-   var that = this;
+      var that = this;
       fetch('/api/settings')
        .then(function(response) {
           return response.json()
         })
        .then(function(json) {
           that.name.value = json.name;
+          that.wifi_network.value = json.wifi_network;
         })
         .catch(function(ex) {
-          console.log('parsing failed', ex)
+          console.log('settings parsing failed', ex)
+      })
+      fetch('/api/wifi_networks')
+        .then(function(response) {
+          return response.json()
+        })
+       .then(function(json) {
+          that.wifi_networks = json;
+          that.update();
+        })
+        .catch(function(ex) {
+          console.log('wifi networks parsing failed', ex)
       })
  </script>
 </connect>

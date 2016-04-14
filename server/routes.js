@@ -3,6 +3,7 @@ var router = express.Router();
 
 var settings = { name: 'Moikot 007', wifi_network: "AwesomeWiFi", wifi_password: "********" };
 var connection = { connected: false };
+var wifi_networks = [{name: "AAA"}, {name: "BBB"}, {name: "CCDC"}];
 
 router.route('/settings')
   .get(function (req, res) {
@@ -13,6 +14,10 @@ router.route('/settings')
     res.json({ message: 'Settings updated' });
   });
 
+router.route('/wifi_networks')
+  .get(function(req, res) {
+    setTimeout((function() {res.json(wifi_networks)}), 5000);
+});
 
 router.route('/connection')
   .get(function (req, res) {
