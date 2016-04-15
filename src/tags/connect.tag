@@ -13,7 +13,14 @@
           <input name="wifi_network" type="text" class="form-control"/>
           <div class="input-group-btn">
  	        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-              <span class="caret"></span>
+              <div class="dropdown-button">
+                <div name="spinner" class="spinner">
+                  <div class="double-bounce1"></div>
+                  <div class="double-bounce2"></div>
+                </div>
+                <div name="caret" class="dropdown-caret">
+                </div>
+              </div>
             </button>
             <ul class="dropdown-menu dropdown-menu-right">
               <li each={ wifi_networks }><a href="#">{ name }</a></li>
@@ -32,6 +39,8 @@
     </form>
   </div>
  <script>
+   this.is_fetching_wifi_networks = true;
+   
    this.on('mount', function() {
      var dropdown = this.root.querySelector('[data-toggle=dropdown]');
      new Dropdown(dropdown);
@@ -53,10 +62,13 @@
           return response.json()
         })
        .then(function(json) {
+          that.spinner.style.opacity = 0;
+          that.caret.style.opacity = 1;
           that.wifi_networks = json;
           that.update();
         })
         .catch(function(ex) {
+          that.is_fetching_wifi_networks = false;
           console.log('wifi networks parsing failed', ex)
       })
  </script>
