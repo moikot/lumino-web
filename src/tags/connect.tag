@@ -24,8 +24,32 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-right">
               <li each={ wifi_networks }>
-                <a href="#" onclick={ parent.selectWiFi }>{ name }
-                  <ul class="signal-bars bars-{ signal_strength }">
+                <a href="#" onclick={ parent.selectWiFi }>
+                  <i class="glyphicon" style="width:24px"> 
+                    <ul class="signal-bars bars-{ signal_strength }">
+                      <li class="first-bar bar">
+                        <div></div>
+                      </li>
+                      <li class="second-bar bar">
+                        <div></div>
+                      </li>
+                      <li class="third-bar bar">
+                        <div></div>
+                      </li>
+                      <li class="fourth-bar bar">
+                        <div></div>
+                      </li>
+                    </ul> 
+                  </i>
+                  <i class="icon-lock"></i>
+                  { name }
+                </a>
+              </li>
+   
+             <!-- <li each={ wifi_networks }>
+                <a href="#" onclick={ parent.selectWiFi }>
+                  <i class="icon-lock"></i>
+                 <ul class="signal-bars bars-{ signal_strength }">
                     <li class="first-bar bar">
                       <div></div>
                     </li>
@@ -38,9 +62,10 @@
                     <li class="fourth-bar bar">
                       <div></div>
                     </li>
-                  </ul>  
+                  </ul>
+                  { name }
                 </a>
-              </li>
+              </li> -->
             </ul>
           </div>
         </div>

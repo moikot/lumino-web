@@ -3,7 +3,7 @@ var router = express.Router();
 
 var settings = { name: 'Moikot 007', wifi_network: "AwesomeWiFi", wifi_password: "********" };
 var connection = { connected: false };
-var wifi_networks = [{name: "AAA", signal_strength: 24}, {name: "BBB", signal_strength: 26}, {name: "CCC", signal_strength: 55}, {name: "My WiFi", signal_strength: 76}];
+var wifi_networks = [{name: "AAA", signal_strength: 24}, {name: "BBB", signal_strength: 26}, {name: "SUPER LONG WIFI NAME", signal_strength: 55}, {name: "My WiFi", signal_strength: 76}];
 
 router.route('/settings')
   .get(function (req, res) {
@@ -16,7 +16,7 @@ router.route('/settings')
 
 router.route('/wifi_networks')
   .get(function(req, res) {
-    setTimeout((function() {res.json(wifi_networks)}), 5000);
+    setTimeout((function() {res.json(wifi_networks)}), 500);
 });
 
 router.route('/connection')

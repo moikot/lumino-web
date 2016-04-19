@@ -51,6 +51,11 @@ var bootstrapJs = {
    out: dest + 'js/'
 };
 
+var fonts = {
+  in: source + 'font/*.*',
+  out: dest + 'font/'
+}
+
 var fetchJs = {
   in: fetch.in + 'fetch.js',
   out: dest + 'js/'
@@ -124,8 +129,14 @@ gulp.task('sass', /*['fonts'],*/ function () {
      .pipe(liveReload());
 });
 
+gulp.task('font', function () {
+    return gulp
+      .src(fonts.in)
+      .pipe(gulp.dest(fonts.out))
+});
+
 // default task
-gulp.task('default', ['sass', 'html', 'bootstrapJs', 'appTags', 'fetch'], function () {
+gulp.task('default', ['sass', 'font', 'html', 'bootstrapJs', 'appTags', 'fetch'], function () {
      liveReload.listen();
      gulp.watch(css.watch, ['sass']);
      gulp.watch(html.watch, ['html']);
