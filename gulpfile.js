@@ -11,30 +11,23 @@ var
     dest = 'dist/';
 
 // Bootstrap scss source
-var bootstrapSass = {
-        in: './node_modules/bootstrap-sass/'
-    };
+var bootstrapSass = { in : './node_modules/bootstrap-sass/'
+};
 
 // Bootstrap native source
-var bootstrapNative = {
-        in: './node_modules/bootstrap.native/'
-    };
+var bootstrapNative = { in : './node_modules/bootstrap.native/'
+};
 
 // Fecth REST polyfill
-var fetch = {
-        in: './node_modules/whatwg-fetch/'
-    };
+var fetch = { in : './node_modules/whatwg-fetch/'
+};
 
-
-// fonts
-//var fonts = {
-//        in: [source + 'fonts/*.*', bootstrapSass.in + 'assets/fonts/**/*'],
-//        out: dest + 'fonts/'
-//    };
+// Riot framework
+var riot = { in : './node_modules/riot/'
+};
 
 // css source file: .scss files
-var css = {
-    in: source + 'scss/main.scss',
+var css = { in : source + 'scss/main.scss',
     out: dest + 'css/',
     watch: source + 'scss/**/*',
     sassOpts: {
@@ -45,100 +38,99 @@ var css = {
     }
 };
 
-var bootstrapJs = {
-   in: bootstrapNative.in + 'dist/bootstrap-native.js',
-   distName: 'bootstrap-native',
-   out: dest + 'js/'
+var bootstrapJs = { in : bootstrapNative.in + 'dist/bootstrap-native.js',
+    distName: 'bootstrap-native',
+    out: dest + 'js/'
 };
 
-var fonts = {
-  in: source + 'font/*.*',
-  out: dest + 'font/'
+var riotJs = { in : riot.in + '/riot+compiler.min.js',
+    out: dest + 'js/'
 }
 
-var fetchJs = {
-  in: fetch.in + 'fetch.js',
-  out: dest + 'js/'
+var fetchJs = { in : fetch.in + 'fetch.js',
+    out: dest + 'js/'
 };
 
-var html = {
-   in: source + '*.html',
-   out: dest,
-   watch: source + '*.html' 
+var fonts = { in : source + 'font/*.*',
+    out: dest + 'font/'
+}
+
+var html = { in : source + '*.html',
+    out: dest,
+    watch: source + '*.html'
 };
 
-var tags = {
-   in: source + 'tags/*.tag',
-   out: dest + 'tags/',
-   watch: source + 'tags/*.tag', 
+var tags = { in : source + 'tags/*.tag',
+    out: dest + 'tags/',
+    watch: source + 'tags/*.tag',
 };
 
-//gulp.task('fonts', function () {
-//    return gulp
-//        .src(fonts.in)
-//        .pipe(gulp.dest(fonts.out));
-//});
-
-gulp.task('bootstrapJs', function () {
+gulp.task('bootstrapJs', function() {
     var srcDir = bootstrapNative.in + 'lib/';
     // array of source files to build
     var sources = [
-//      srcDir + 'affix-native.js',
-//      srcDir + 'alert-native.js',
-//      srcDir + 'button-native.js',
-//      srcDir + 'carousel-native.js',
-//      srcDir + 'collapse-native.js',
-      srcDir + 'dropdown-native.js'//,
-//      srcDir + 'modal-native.js',
-//      srcDir + 'popover-native.js',
-//      srcDir + 'scrollspy-native.js',
-//      srcDir + 'tab-native.js',
-//      srcDir + 'tooltip-native.js'
+        //      srcDir + 'affix-native.js',
+        //      srcDir + 'alert-native.js',
+        //      srcDir + 'button-native.js',
+        //      srcDir + 'carousel-native.js',
+        //      srcDir + 'collapse-native.js',
+        srcDir + 'dropdown-native.js' //,
+        //      srcDir + 'modal-native.js',
+        //      srcDir + 'popover-native.js',
+        //      srcDir + 'scrollspy-native.js',
+        //      srcDir + 'tab-native.js',
+        //      srcDir + 'tooltip-native.js'
     ];
     return gulp
-	  .src(sources)
-          .pipe(concat(bootstrapJs.distName + ".js"))
-	  .pipe(gulp.dest(bootstrapJs.out));
+        .src(sources)
+        .pipe(concat(bootstrapJs.distName + ".js"))
+        .pipe(gulp.dest(bootstrapJs.out));
 });
 
-gulp.task('appTags', function () {
+gulp.task('appTags', function() {
     return gulp
-	  .src(tags.in)
-	  .pipe(gulp.dest(tags.out))
-	  .pipe(liveReload());
+        .src(tags.in)
+        .pipe(gulp.dest(tags.out))
+        .pipe(liveReload());
 });
 
-gulp.task('html', function () {
+gulp.task('html', function() {
     return gulp
-	  .src(html.in)
-	  .pipe(gulp.dest(html.out))
-	  .pipe(liveReload());
+        .src(html.in)
+        .pipe(gulp.dest(html.out))
+        .pipe(liveReload());
 });
 
-gulp.task('fetch', function () {
+gulp.task('fetch', function() {
     return gulp
-	  .src(fetchJs.in)
-	  .pipe(gulp.dest(fetchJs.out))
+        .src(fetchJs.in)
+        .pipe(gulp.dest(fetchJs.out));
+});
+
+gulp.task('riot', function() {
+    return gulp
+        .src(riotJs.in)
+        .pipe(gulp.dest(riotJs.out));
 });
 
 // compile scss
-gulp.task('sass', /*['fonts'],*/ function () {
+gulp.task('sass', /*['fonts'],*/ function() {
     return gulp.src(css.in)
-     .pipe(sass(css.sassOpts))
-     .pipe(gulp.dest(css.out))
-     .pipe(liveReload());
+        .pipe(sass(css.sassOpts))
+        .pipe(gulp.dest(css.out))
+        .pipe(liveReload());
 });
 
-gulp.task('font', function () {
+gulp.task('font', function() {
     return gulp
-      .src(fonts.in)
-      .pipe(gulp.dest(fonts.out))
+        .src(fonts.in)
+        .pipe(gulp.dest(fonts.out));
 });
 
 // default task
-gulp.task('default', ['sass', 'font', 'html', 'bootstrapJs', 'appTags', 'fetch'], function () {
-     liveReload.listen();
-     gulp.watch(css.watch, ['sass']);
-     gulp.watch(html.watch, ['html']);
-     gulp.watch(tags.watch, ['appTags']);
+gulp.task('default', ['sass', 'font', 'html', 'bootstrapJs', 'fetch', 'riot', 'appTags'], function() {
+    liveReload.listen();
+    gulp.watch(css.watch, ['sass']);
+    gulp.watch(html.watch, ['html']);
+    gulp.watch(tags.watch, ['appTags']);
 });

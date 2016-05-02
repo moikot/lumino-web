@@ -80,7 +80,7 @@
 </wifi_network>
 <connect>
     <div class="container">
-        <form class="form form-connect" role="form" onsubmit={ connect }>
+        <div class="form form-connect" onsubmit={ connect }>
             <h1 class="form-connect-heading">Please connect me to your WiFi</h1>
             <br/>
             <div class="form-group">
@@ -97,9 +97,9 @@
             </div>
             <br/>
             <div class="form-group">
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Connect</button>
+                <button class="btn btn-lg btn-primary btn-block">Connect</button>
             </div>
-        </form>
+        </div>
     </div>
     <script>
         this.settings = {
