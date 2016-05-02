@@ -1,0 +1,9 @@
+diff a/src/tags/connect.tag b/src/tags/connect.tag	(rejected hunks)
+@@ -97,7 +97,6 @@
+             </div>
+             <br/>
+             <div class="form-group">
+-                <button class="btn btn-lg btn-primary btn-block" type="submit">Connect</button>
+                 <button class="btn btn-lg btn-primary btn-block">Connect</button>
+             </div>
+         </div>

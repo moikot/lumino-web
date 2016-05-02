@@ -80,7 +80,7 @@
 </wifi_network>
 <connect>
     <div class="container">
-        <div class="form form-connect" onsubmit={ connect }>
+        <form class="form form-connect" role="form" onsubmit={ updateSettings }>
             <h1 class="form-connect-heading">Please connect me to your WiFi</h1>
             <br/>
             <div class="form-group">
@@ -97,9 +97,10 @@
             </div>
             <br/>
             <div class="form-group">
-                <button class="btn btn-lg btn-primary btn-block">Connect</button>
+                <button if="{ settings.connected }" class="btn btn-lg btn-danger btn-block" type="submit">Disconnect</button>
+                <button if="{ !settings.connected }" class="btn btn-lg btn-primary btn-block" type="submit">Connect</button>
             </div>
-        </div>
+        </form>
     </div>
     <script>
         this.settings = {
@@ -107,28 +108,37 @@
         };
         var that = this;
 
-        connect(e) {
-            that.settings.name = that.name.value;
-            that.settings.password = that.name.password;
-
+        updateSettings(e) {
+            var settings = {
+              name: that.name.value,
+              wifi_network: that.settings.wifi_network,
+              wifi_password: that.name.password,
+              connected: !that.settings.connected
+            }
             fetch('/api/settings', {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(that.settings)
-            })
-        }
+                body: JSON.stringify(settings)
+            }).then(function (response) {
+                that.refetchSettings();
+            });
+        };
 
-        fetch('/api/settings').then(function (response) {
-            return response.json()
-        }).then(function (json) {
-            that.settings = json;
-            that.name.value = json.name;
-            that.update();
-        }).catch(function (ex) {
-            console.log('settings parsing failed', ex)
-        })
+        refetchSettings() {
+            fetch('/api/settings').then(function (response) {
+                return response.json()
+            }).then(function (json) {
+                that.settings = json;
+                that.name.value = json.name;
+                that.update();
+            }).catch(function (ex) {
+                console.log('settings parsing failed', ex)
+            });
+        };
+
+        this.refetchSettings();
     </script>
 </connect>

@@ -4,11 +4,10 @@ var router = express.Router();
 var settings = {
     name: 'Moikot 007',
     wifi_network: "AwesomeWiFi",
-    wifi_password: "********"
-};
-var connection = {
+    wifi_password: "********",
     connected: false
 };
+
 var wifi_networks = [{
     name: "AAA",
     signal_strength: 24,
@@ -43,17 +42,6 @@ router.route('/wifi_networks')
         setTimeout((function() {
             res.json(wifi_networks)
         }), 500);
-    });
-
-router.route('/connection')
-    .get(function(req, res) {
-        res.json(connection);
-    })
-    .put(function(req, res) {
-        connection = req.body;
-        res.json({
-            message: 'Connection updated'
-        });
     });
 
 
