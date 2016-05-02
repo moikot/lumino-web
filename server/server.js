@@ -4,10 +4,11 @@ var connections = require('./routes');
 
 var app = express();
 
-app.use(express.static('../dist'));
+app.use(express.static(__dirname + './../dist'));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use('/api', connections);
 app.set('port', process.env.PORT || 8000);
 
