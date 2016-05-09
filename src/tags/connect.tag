@@ -45,22 +45,27 @@
                 name: "Scanning..."
             }
         ];
+
         this.on('mount', function () {
             var dropdown = this.root.querySelector('[data-toggle=dropdown]');
             new Dropdown(dropdown);
         })
+
         this.on('update', function () {
             that.wifi_network.value = opts.settings.wifi_network;
         })
+
         select_wifi(event) {
             var item = event.item
             if (item.signal_strength)
                 opts.settings.wifi_network = item.name;
             }
+
         hide_spinner() {
             this.spinner.style.opacity = 0;
             this.caret.style.opacity = 1;
         }
+
         fetch('/api/wifi_networks').then(function (response) {
             return response.json()
         }).then(function (json) {
