@@ -14,8 +14,8 @@
             <ul class="dropdown-menu dropdown-menu-right">
                 <li each={ wifi_networks }>
                     <a href="#" onclick={ parent.select_wifi }>
-                        <i if="{ signal_strength }" class="glyphicon" style="width:24px">
-                            <ul class="signal-bars bars-{ signal_strength }">
+                        <i if="{ rssi }" class="glyphicon" style="width:24px">
+                            <ul class="signal-bars bars-{ rssi }">
                                 <li class="first-bar bar">
                                     <div></div>
                                 </li>
@@ -30,9 +30,9 @@
                                 </li>
                             </ul>
                         </i>
-                        <i if="{ protected }" class="icon-lock"></i>
-                        <i if="{ !protected }" class="icon-spacer"></i>
-                        { name }
+                        <i if="{ encryption }" class="icon-lock"></i>
+                        <i if="{ !encryption }" class="icon-spacer"></i>
+                        { ssid }
                     </a>
                 </li>
             </ul>
@@ -57,8 +57,8 @@
 
         select_wifi(event) {
             var item = event.item
-            if (item.signal_strength)
-                opts.settings.wifi_network = item.name;
+            if (item.rssi)
+                opts.settings.wifi_network = item.ssid;
             }
 
         hide_spinner() {
@@ -66,15 +66,23 @@
             this.caret.style.opacity = 1;
         }
 
-        fetch('/api/wifi_networks').then(function (response) {
+        fetch('/wifi_networks').then(function (response) {
             return response.json()
         }).then(function (json) {
             that.hide_spinner();
             that.wifi_networks = json.sort(function (a, b) {
-                return b.signal_strength - a.signal_strength;
+                return b.rssi - a.rssi;
             })
             that.wifi_networks.forEach(function (entry) {
-                entry.signal_strength = Math.floor(entry.signal_strength / 25) + 1;
+                var strength = 1;
+                if (entry.rssi > -70)
+                  strength = 2;
+                if (entry.rssi > -60)
+                  strength = 3;
+                if (entry.rssi > -50)
+                  strength = 4;
+                entry.rssi = strength;
+                entry.encryption = (entry.encryption != "None");
             });
             that.update();
         }).catch(function (ex) {
@@ -133,7 +141,7 @@
         };
 
         refetchSettings() {
-            fetch('/api/settings').then(function (response) {
+            fetch('/settings').then(function (response) {
                 return response.json()
             }).then(function (json) {
                 that.settings = json;

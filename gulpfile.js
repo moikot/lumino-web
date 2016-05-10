@@ -2,6 +2,8 @@
 var
     gulp = require('gulp'),
     sass = require('gulp-sass'),
+    gzip = require('gulp-gzip'),
+    uglify = require('gulp-uglify');
     concat = require('gulp-concat'),
     liveReload = require('gulp-livereload');
 
@@ -60,6 +62,11 @@ var html = { in : source + '*.html',
     watch: source + '*.html'
 };
 
+var icon = { 
+    in : source + '*.ico',
+    out: dest
+};
+
 var tags = { in : source + 'tags/*.tag',
     out: dest + 'tags/',
     watch: source + 'tags/*.tag',
@@ -84,6 +91,9 @@ gulp.task('bootstrapJs', function() {
     return gulp
         .src(sources)
         .pipe(concat(bootstrapJs.distName + ".js"))
+	.pipe(uglify())
+        .pipe(gulp.dest(bootstrapJs.out))
+	.pipe(gzip())
         .pipe(gulp.dest(bootstrapJs.out));
 });
 
@@ -101,15 +111,26 @@ gulp.task('html', function() {
         .pipe(liveReload());
 });
 
+gulp.task('icon', function() {
+    return gulp
+        .src(icon.in)
+        .pipe(gulp.dest(icon.out));
+});
+
 gulp.task('fetch', function() {
     return gulp
         .src(fetchJs.in)
+	.pipe(uglify())
+        .pipe(gulp.dest(fetchJs.out))
+	.pipe(gzip())
         .pipe(gulp.dest(fetchJs.out));
 });
 
 gulp.task('riot', function() {
     return gulp
         .src(riotJs.in)
+        .pipe(gulp.dest(riotJs.out))
+	.pipe(gzip())
         .pipe(gulp.dest(riotJs.out));
 });
 
@@ -117,6 +138,8 @@ gulp.task('riot', function() {
 gulp.task('sass', /*['fonts'],*/ function() {
     return gulp.src(css.in)
         .pipe(sass(css.sassOpts))
+        .pipe(gulp.dest(css.out))
+	.pipe(gzip())
         .pipe(gulp.dest(css.out))
         .pipe(liveReload());
 });
@@ -128,7 +151,7 @@ gulp.task('font', function() {
 });
 
 // default task
-gulp.task('default', ['sass', 'font', 'html', 'bootstrapJs', 'fetch', 'riot', 'appTags'], function() {
+gulp.task('default', ['sass', 'font', 'html', 'icon', 'bootstrapJs', 'fetch', 'riot', 'appTags'], function() {
     liveReload.listen();
     gulp.watch(css.watch, ['sass']);
     gulp.watch(html.watch, ['html']);

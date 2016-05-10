@@ -9,7 +9,7 @@ app.use(express.static(__dirname + './../dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/api', connections);
+app.use('/', connections);
 app.set('port', process.env.PORT || 8000);
 
 var server = app.listen(app.get('port'), function () {

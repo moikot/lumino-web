@@ -174,13 +174,13 @@ input[type="text"], input[type="password"] {
   border: thin solid darken(#16a085, 7%);
 }
 
-.bars-3 div {
+.bars-3 div,
+.bars-2 div {
   background-color: #f1c40f;
   border: thin solid darken(#f1c40f, 7%);
 }
 
-.bars-1 div,
-.bars-2 div {
+.bars-1 div {
   background-color: #e74c3c;
   border: thin solid darken(#e74c3c, 20%);
 }
