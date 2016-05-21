@@ -8,7 +8,11 @@ var settings = {
     connected: false
 };
 
-var wifi_networks = [{"ssid": "EE-BrightBox-6374g9","rssi": -55,"encryption": "Auto"},{"ssid": "virginmedia9996303","rssi": -49,"encryption": "WPA2"},{"ssid": "BTWifi-with-FON","rssi": -68,"encryption": "None"},{"ssid": "TALKTALK-FF71AE","rssi": -87,"encryption": "Auto"},{"ssid": "HUAWEI-B593-3484","rssi": -93,"encryption": "Auto"},{"ssid": "BTHub4-NC8S","rssi": -68,"encryption": "Auto"},{"ssid": "BTWifi-X","rssi": -69,"encryption": "None"},];
+var wifi_networks = [
+  {"ssid": "EE-BrightBox-6374g9","rssi": -55,"encryption": "Auto"},
+  {"ssid": "virginmedia9996303","rssi": -49,"encryption": "WPA2"},
+  {"ssid": "BTWifi-with-FON","rssi": -68,"encryption": "None"},
+  {"ssid": "TALKTALK-FF71AE","rssi": -87,"encryption": "Auto"}];
 
 router.route('/settings')
     .get(function(req, res) {
