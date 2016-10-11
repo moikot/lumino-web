@@ -42,13 +42,13 @@
         var that = this;
         this.wifi_networks = [
             {
-                name: "Scanning..."
+                ssid: "Scanning..."
             }
         ];
 
         this.on('mount', function () {
             var dropdown = this.root.querySelector('[data-toggle=dropdown]');
-            new Dropdown(dropdown);
+            that.dorpdown = new Dropdown(dropdown);
         })
 
         this.on('update', function () {
@@ -59,13 +59,43 @@
             var item = event.item
             if (item.rssi)
                 opts.settings.wifi_network = item.ssid;
-            }
+            that.dorpdown.close();
+        }
 
         hide_spinner() {
             this.spinner.style.opacity = 0;
             this.caret.style.opacity = 1;
         }
 
+        update_networks(json) {
+          that.hide_spinner();
+          that.wifi_networks = json.sort(function (a, b) {
+              return b.rssi - a.rssi;
+          })
+          that.wifi_networks.forEach(function (entry) {
+              var strength = 1;
+              if (entry.rssi > -70)
+                strength = 2;
+              if (entry.rssi > -60)
+                strength = 3;
+              if (entry.rssi > -50)
+                strength = 4;
+              entry.rssi = strength;
+              entry.encryption = (entry.encryption != "NONE");
+          });
+          that.update();
+        };
+
+        var connection = new WebSocket('ws://192.168.1.76/ws');
+        connection.onopen = function () {
+          connection.send('{"type": "request", "action": "get", "resource": "networks"}');
+        };
+
+        connection.onmessage = function (e) {
+          that.update_networks(JSON.parse(e.data).content.object.elements);
+        };
+
+        /*
         fetch('/wifi_networks').then(function (response) {
             return response.json()
         }).then(function (json) {
@@ -88,7 +118,7 @@
         }).catch(function (ex) {
             that.hide_spinner();
             console.log('wifi networks parsing failed', ex)
-        })
+        })*/
     </script>
 </wifi_network>
 <connect>
