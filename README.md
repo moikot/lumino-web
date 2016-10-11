@@ -1,4 +1,4 @@
-# customize-bootstrap-sass
+# Moikot web
 
 Simple demo of customizing `Bootstrap` CSS styles using `Gulp`.
 

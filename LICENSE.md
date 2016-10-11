@@ -1,5 +1,3 @@
-
-
 ## Font Awesome
 
    Copyright (C) 2012 by Dave Gandy
