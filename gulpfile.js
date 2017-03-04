@@ -101,6 +101,8 @@ gulp.task('appTags', function() {
     return gulp
         .src(tags.in)
         .pipe(gulp.dest(tags.out))
+	.pipe(gzip())
+        .pipe(gulp.dest(tags.out))
         .pipe(liveReload());
 });
 
