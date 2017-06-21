@@ -1,8 +1,16 @@
-# Lumino web
+# Lumino Web
 
-## Usage
+A captive portal implementation for the [Lumino ESP](https://github.com/anisimovsergey/lumino-esp) project based on Framework7 + Vue + Webpack. Using this captive portal you can connect Lumino to your home WiFi.
 
-```
-$ npm install
-$ gulp
+## Build
+
+``` bash
+# Install dependencies
+npm install
+
+# Serve with hot reload at localhost:8080
+npm run dev
+
+# Build for production with minification and zipping
+npm run build
 ```

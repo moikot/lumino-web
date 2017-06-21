@@ -1,0 +1,190 @@
+/* =========
+Your custom styles go here
+ ========= */
+
+html, body {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+/* =========
+Navigation bar
+ ========= */
+
+.navbar {
+  border-bottom: none;
+  background: #22B29F;
+  color: #ffffff;
+  height: 56px;
+  font-size: 20px;
+}
+
+.navbar-fixed .page-content, .navbar-through .page-content {
+  padding-top: 56px;
+}
+
+.navbar {
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+}
+
+.navbar:after {
+  display: none;
+}
+
+.navbar .center {
+  font-size: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.navbar a.link {
+  color: #ffffff;
+}
+
+i.icon-back {
+  background-image: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 20'><path d='M10,0l2,2l-8,8l8,8l-2,2L0,10L10,0z' fill='%23ffffff'/></svg>") !important;
+}
+
+/* =========
+List
+ ========= */
+
+i.icon-none {
+  width: 20px;
+}
+
+.content-block-title {
+  margin-top: 30px;
+}
+
+.list-block {
+  margin-top: 30px;
+}
+
+.list-block .item-content {
+  padding-left: 10px
+}
+
+.list-block .item-media+.item-inner {
+  margin-left: 10px;
+}
+
+.wifi-list .item-link .item-inner {
+  background: none;
+  padding-right: 12px;
+}
+
+.wifi-list .wifi {
+  font-size: 18px;
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wifi-list .encryption {
+  font-size: 14px;
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.wifi-list .item-after {
+  font-size: 18px;
+  max-height: none;
+  color: black;
+  display: inline-block;
+}
+
+.other {
+  font-size: 18px;
+  height: 44px;
+  line-height: 44px;
+}
+
+.other span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.list-block ul ul {
+  padding-left: 0px;
+  background: transparent;
+}
+
+.list-block .item-icon {
+  margin-top: 4px;
+}
+
+.list-block-label.connection-error {
+    color: #e63a3a;
+}
+
+.content-block-title .title-icon {
+  vertical-align: inherit;
+}
+
+/* =========
+Signal bars
+ ========= */
+
+.signal-bars {
+  display: inline-block;
+  vertical-align: middle;
+  height: 20px;
+  list-style: none;
+  overflow: hidden;
+  padding: 0px;
+  margin: 0px;
+}
+
+.signal-bars .bar {
+  display: inline-block;
+  width: 4px;
+  float: left;
+  height: 100%;
+  margin-right: 2px;
+}
+
+.signal-bars .bar.first-bar {
+  padding-top: 12px;
+}
+
+.signal-bars .bar.second-bar {
+  padding-top: 8px;
+}
+
+.signal-bars .bar.third-bar {
+  padding-top: 4px;
+}
+
+.signal-bars .bar.fourth-bar {
+  padding-top: 0px;
+}
+
+.signal-bars li div {
+  height: 100%;
+}
+
+.bars-4 div {
+  background-color: black;
+}
+
+.bars-3 div, .bars-2 div {
+  background-color: black;
+}
+
+.bars-1 div {
+  background-color: black;
+}
+
+.bars-3 .bar.fourth-bar div, .bars-1 .bar:not(.first-bar) div, .bars-2 .bar:not(.first-bar):not(.second-bar) div {
+  background-color: #e0e0e0;
+}
