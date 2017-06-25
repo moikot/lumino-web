@@ -14,3 +14,6 @@ npm run dev
 # Build for production with minification and zipping
 npm run build
 ```
+
+## Credits
+This project based on [Framework7-Vue-Webpack-Template](https://github.com/nolimits4web/Framework7-Vue-Webpack-Template)
