@@ -16,7 +16,7 @@ import Framework7Theme from './lib/css/framework7.ios.custom.min.css'
 
 
 // Import App Custom Styles
-import AppStyles from './css/app.scss'
+import AppStyles from './css/app.css'
 import FontaStyles from './css/fonta.css'
 import FontaAnimation from './css/animation.css'
 
